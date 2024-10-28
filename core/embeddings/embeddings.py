@@ -1,7 +1,7 @@
 from typing import List
-from .base import BaseComponent
+from core.base import BaseComponent
 from langchain.embeddings import OpenAIEmbeddings, HuggingFaceEmbeddings
-from FlagEmbedding import BGEM3FlagModel
+
 
 class EmbeddingsFactory(BaseComponent):
     """嵌入向量模型工厂类"""
