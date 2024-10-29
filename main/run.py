@@ -1,16 +1,15 @@
-from Codereader import CodeKnowledgeBase
+import CodeKnowledgeBase
 
-# 初始化知识库
-kb = CodeKnowledgeBase(openai_api_key="sk-e53cf170fff844b88f5a7e2b4c4a86d5")
+kb = CodeKnowledgeBase(openai_api_key="your-api-key")
+kb.build_knowledge_base("./your_project_path")
 
-# 构建知识库
-kb.build_knowledge_base(
-    project_path="./your_project_path",
-    output_path="./code_knowledge_base"
-)
+# 查询特定类型的代码元素
+results = kb.query("查找所有与用户认证相关的类")
 
-# 查询
-results = kb.query(
-    query="查找用户认证相关的代码",
-    knowledge_base_path="./code_knowledge_base"
-)
+# 查看结果
+for result in results:
+    print(f"Type: {result['metadata']['element_type']}")
+    print(f"Name: {result['metadata']['element_name']}")
+    if result['metadata']['docstring']:
+        print(f"Docstring: {result['metadata']['docstring']}")
+    print(f"Code:\n{result['content']}\n")

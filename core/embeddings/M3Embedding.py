@@ -10,10 +10,8 @@ class M3E(EmbeddingsFactory):
         super().__init__()
         
     
-    def initialize(self, embeddings_type: str = 'huggingface', **kwargs):
-        self.embeddings = BGEM3FlagModel('BAAI/bge-m3',  
-                       use_fp16=True)
-        return 
+    def initialize(self):
+        self.embeddings = BGEM3FlagModel('BAAI/bge-m3', use_fp16=True)
     
     def get_embeddings(self, texts: List[str]) -> List[List[float]]:
         embedding = self.embeddings.encode(texts, batch_size=12, max_length=8192)['dense_vecs']
@@ -22,4 +20,5 @@ class M3E(EmbeddingsFactory):
 
 if __name__=='__main__':
     e = M3E()
+    e.initialize()
     e.get_embeddings(['中国是一个伟大的国家'])
